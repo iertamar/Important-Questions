@@ -1,0 +1,55 @@
+import java.util.*;
+
+ class pair {
+     int a;
+     int b;
+
+     public pair(int a, int b) {
+         this.a = a;
+         this.b = b;
+     }
+ }
+class Sortbya implements Comparator<pair>
+{
+    public int compare(pair p1 , pair p2)
+    {
+        return p1.a - p2.a;
+    }
+}
+
+
+ class practice
+ {
+     public static void main(String[] args) {
+         Scanner sc = new Scanner(System.in);
+         System.out.println("Enter Number Of Pairs");
+         int n = sc.nextInt();
+         ArrayList <pair> list = new ArrayList<>();
+         for(int i = 0 ; i<n ;i++)
+         {
+             list.add(new pair(sc.nextInt() , sc.nextInt()));
+         }
+         int ans[] = new int[n];
+         Collections.sort(list , new Sortbya());
+         for(int i=0; i<n; i++)
+         {
+             ans[i] = 1;
+         }
+         for(int i =1; i<n;i++)
+         {
+             for(int j=0; j<i; j++)
+             {
+                 if(list.get(i).a > list.get(j).b)
+                     if(ans[j]+1>ans[i])
+                        ans[i] = ans[j]+1;
+             }
+         }
+         int max = Integer.MIN_VALUE;
+         for(int i=0; i<n; i++)
+         {
+             if(max<ans[i])
+                 max = ans[i];
+         }
+         System.out.println(max);
+     }
+ }
