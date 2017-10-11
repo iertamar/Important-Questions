@@ -1,0 +1,17 @@
+class GfG
+{
+     
+      int c = 0;
+    public void kthLargest(Node root,int k)
+    {
+        if(root!=null)
+        {
+            kthLargest(root.right , k);
+            c++;
+            if(c==k)
+               System.out.println(root.data);
+            kthLargest(root.left , k);   
+        }
+    }
+ 
+}
