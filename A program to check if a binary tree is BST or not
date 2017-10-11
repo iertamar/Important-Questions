@@ -1,0 +1,69 @@
+//ALGO 1... NOT EFFICIENT
+
+int isBST(struct node* node) 
+{ 
+  if (node == NULL) 
+    return(true); 
+     
+  /* false if the max of the left is > than us */
+  if (node->left!=NULL && maxValue(node->left) > node->data) 
+    return(false); 
+     
+  /* false if the min of the right is <= than us */
+  if (node->right!=NULL && minValue(node->right) < node->data) 
+    return(false); 
+   
+  /* false if, recursively, the left or right is not a BST */
+  if (!isBST(node->left) || !isBST(node->right)) 
+    return(false); 
+     
+  /* passing all that, it's a BST */
+  return(true); 
+} 
+
+
+int minValue(Node root)
+    {
+        int minv = root.key;
+        while(root.left!=null)
+        {
+            minv = root.left.key; 
+            root = root.left;
+        }
+        return minv ;
+}
+
+int maxValue(Node root)
+    {
+        int maxv = root.key;
+        while(root.right!=null)
+        {
+            maxv = root.right.key; 
+            root = root.right;
+        }
+        return maxv ;
+}
+
+// ALGO 2 ... EFFICIENT
+
+boolean isBSTUtil(Node node, int min, int max)
+    {
+        /* an empty tree is BST */
+        if (node == null)
+            return true;
+ 
+        /* false if this node violates the min/max constraints */
+        if (node.data < min || node.data > max)
+            return false;
+ 
+        /* otherwise check the subtrees recursively
+        tightening the min/max constraints */
+        // Allow only distinct values
+        return (isBSTUtil(node.left, min, node.data-1) &&
+                isBSTUtil(node.right, node.data+1, max));
+    }
+    
+    // ALGO 3... 
+    //we first find out inOrder traversal then check if founded order is in sorted order
+    // then BST otherwise NOT BST
+    
