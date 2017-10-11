@@ -1,0 +1,10 @@
+int getCountOfNode(Node root, int low, int high) 
+    {
+         if(root==null)
+         return 0;
+         if(root.data > high)
+         return getCountOfNode(root.left , low , high);
+         if(root.data < low)
+         return getCountOfNode(root.right , low , high);
+         return 1+getCountOfNode(root.left , low , high)+ getCountOfNode(root.right , low , high);
+    }
