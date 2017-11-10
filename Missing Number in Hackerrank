@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+       Scanner sc = new Scanner(System.in);
+       int n = sc.nextInt();
+        HashMap <Integer , Integer> hmap = new HashMap<Integer, Integer>();
+        for(int i =0; i<n ;i++)
+        {   
+            int x = sc.nextInt(); 
+            if(hmap.containsKey(x))
+            {
+                hmap.put(x ,hmap.get(x)+1);
+                continue;
+            }
+            hmap.put(x,1);
+        }
+        int m = sc.nextInt();
+         HashMap <Integer , Integer> hmap1 = new HashMap<Integer, Integer>();
+         for(int i =0; i<m ;i++)
+        {
+            int number = sc.nextInt();
+            if(hmap1.containsKey(number))
+            {
+                hmap1.put(number , hmap1.get(number)+1);
+                continue ;
+            }
+            
+            hmap1.put(number , 1);
+        }
+        Set set2 = hmap1.entrySet();
+        Iterator itr2 = set2.iterator();
+        
+        TreeMap<Integer , Integer>tmap = new TreeMap<Integer , Integer>();
+        while(itr2.hasNext())
+        {
+             int z =0;
+            Map.Entry me = (Map.Entry) itr2.next();
+            int x = (Integer) me.getKey();
+            int y = (Integer) me.getValue();
+            if(hmap.containsKey(x))
+                z = hmap.get(x);
+            if((y-z)!=0)
+                tmap.put(x , 0);
+        }  
+         Set set3 = tmap.entrySet() ;
+        Iterator itr3 = set3.iterator();
+        while(itr3.hasNext())
+        {
+            Map.Entry me2 = (Map.Entry) itr3.next();
+            System.out.print(me2.getKey()+" ");
+        }
+        
+       
+    }
+}
